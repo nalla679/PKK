@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Repositori SMK BPPI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Raleway', sans-serif;
+      min-height: 100vh;
+      background-image: url('https://i.pinimg.com/originals/9b/7c/4b/9b7c4b11c62be7d5e2dfe04779f328b2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      backdrop-filter: blur(2px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.6s ease;
+    }
+
+    .welcome, .main-content, .result-page {
+      background-color: #fff5e1;
+      text-align: center;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 90%;
+      animation: fadeIn 1s ease;
+      display: none;
+    }
+
+    h1, h2, h3 {
+      color: #7e57c2;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background-color: #f48fb1;
+      color: white;
+      font-size: 1em;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #ec407a;
+      transform: scale(1.05);
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      font-size: 1em;
+    }
+
+    .pdf-section {
+      margin-top: 30px;
+    }
+
+    embed {
+      width: 100%;
+      height: 500px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Halaman 1 - Sambutan -->
+  <div class="welcome" id="welcome" style="display: block;">
+    <h1>Repositori</h1>
+    <p>welcome to project XII AKL<br>Klik ya kidss</p>
+    <button class="btn" onclick="masukWebsite()">Click</button>
+  </div>
+
+  <!-- Halaman 2 - Form Input -->
+  <div class="main-content" id="mainContent">
+    <h2>Kenali Jurusanmu</h2>
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" placeholder="Masukkan nama kamu"/>
+
+    <label for="jurusan">Jurusan:</label>
+    <select id="jurusan">
+      <option value="">-- Pilih Jurusan --</option>
+      <option value="TJKT">TJKT</option>
+      <option value="PPLG">PPLG</option>
+      <option value="AKL">AKL</option>
+      <option value="ACP">ACP</option>
+    </select>
+
+    <button class="btn" onclick="masukHalamanSelanjutnya()">Klik untuk mengetahui jurusanmu</button>
+  </div>
+
+  <!-- Halaman 3 - Penjelasan Jurusan -->
+  <div class="result-page" id="resultPage">
+    <h2 id="namaHasil"></h2>
+    <p id="penjelasanHasil"></p>
+
+    <div class="pdf-section">
+      <h3>Contoh Laporan PKL</h3>
+      <p>Berikut contoh laporan PKL referensi untuk mu kidss:</p>
+      <embed src="Resvita_Hilmi_Az_Zahra_XII_AKL_2024.pdf" type="application/pdf" download>
+    </div>
+  </div>
+
+  <script>
+    function masukWebsite() {
+      document.getElementById('welcome').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    }
+
+    function masukHalamanSelanjutnya() {
+      const nama = document.getElementById('nama').value;
+      const jurusan = document.getElementById('jurusan').value;
+      const namaHasil = document.getElementById('namaHasil');
+      const penjelasanHasil = document.getElementById('penjelasanHasil');
+
+      if (nama === '' || jurusan === '') {
+        alert("Silakan isi nama dan pilih jurusan dulu ya!");
+        return;
+      }
+
+      let penjelasan = '';
+      switch (jurusan) {
+        case 'TJKT':
+          penjelasan = 'TJKT (Teknik Jaringan Komputer & Telekomunikasi) mempelajari jaringan komputer, instalasi perangkat keras, dan teknologi komunikasi.';
+          break;
+        case 'PPLG':
+          penjelasan = 'PPLG (Pengembangan Perangkat Lunak & Gim) fokus pada pengembangan aplikasi, website, mobile app, dan game.';
+          break;
+        case 'AKL':
+          penjelasan = 'AKL (Akuntansi Keuangan Lembaga) mempelajari pencatatan keuangan, laporan keuangan, dan audit lembaga.';
+          break;
+        case 'ACP':
+          penjelasan = 'ACP (AXIOO Class Program) adalah program kolaborasi industri dengan AXIOO, berfokus pada perangkat keras dan software.';
+          break;
+        default:
+          penjelasan = 'Silakan pilih jurusan terlebih dahulu.';
+      }
+
+      namaHasil.innerHTML = `Halo, ${nama}!`;
+      penjelasanHasil.innerText = penjelasan;
+
+      document.getElementById('mainContent').style.display = 'none';
+      document.getElementById('resultPage').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
